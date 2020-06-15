@@ -9,6 +9,9 @@
 
 
 #define GSPFLASH_ONOFF_PARSER(a) [&a](char* szInput) {a.parseOnOff(szInput);}
+#define GSPFLASH_TURNON(a) [&a]() {a.turnOn();}
+#define GSPFLASH_FLASHSLOW(a) [&a]() {a.flashSlow();}
+#define GSPFLASH_FLASHFAST(a) [&a]() {a.flashFast();}
 
 
 class gspFlash:public gspGrouped {
