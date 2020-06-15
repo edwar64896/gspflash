@@ -7,6 +7,10 @@
 #define FAST_COUNT 8192
 #define SLOW_COUNT 16384
 
+
+#define GSPFLASH_ONOFF_PARSER(a) [&a](char* szInput) {a.parseOnOff(szInput);}
+
+
 class gspFlash:public gspGrouped {
 
     public:
@@ -19,7 +23,7 @@ class gspFlash:public gspGrouped {
             return instance;
         }
 
-        void parseOnOff(const char * );
+        void parseOnOff(char * );
 
         void turnOn();
         void turnOff();
