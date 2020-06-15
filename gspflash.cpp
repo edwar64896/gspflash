@@ -4,6 +4,20 @@ uint16_t gspFlash::_flashCnt=0;
 
 gspGrouped * gspFlash::firstInstance=nullptr;
 
+void gspFlash::parseOnOff(const char * szInput) {
+
+    int iInput=atoi(szInput);
+    switch(iInput) {
+        case 0:
+            turnOff();
+        break;
+        case 1:
+            turnOn();
+        break;
+    }
+}
+
+
 gspFlash::gspFlash(int pin):gspGrouped() {
     _pin=pin;
 }

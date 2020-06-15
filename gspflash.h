@@ -19,6 +19,8 @@ class gspFlash:public gspGrouped {
             return instance;
         }
 
+        void parseOnOff(const char * );
+
         void turnOn();
         void turnOff();
         void flashSlow();
