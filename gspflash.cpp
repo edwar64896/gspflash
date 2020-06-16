@@ -4,9 +4,14 @@ uint16_t gspFlash::_flashCnt=0;
 
 gspGrouped * gspFlash::firstInstance=nullptr;
 
-void gspFlash::parseOnOff(char * szInput) {
+
+// mode=0 (Off=0,On=1)
+// mode=1 (Off=1,On=0)
+void gspFlash::parseOnOff(char * szInput, int mode) {
 
     int iInput=atoi(szInput);
+    if (mode)
+        iInput=1-iInput;
     switch(iInput) {
         case 0:
             turnOff();
@@ -15,6 +20,10 @@ void gspFlash::parseOnOff(char * szInput) {
             turnOn();
         break;
     }
+}
+
+void gspFlash::parseOffOn(char * szInput) {
+    parseOnOff(szInput,1);
 }
 
 

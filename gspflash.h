@@ -7,16 +7,17 @@
 #define FAST_COUNT 8192
 #define SLOW_COUNT 16384
 
-
 #define GSPFLASH_ONOFF_PARSER(a) [&a](char* szInput) {a.parseOnOff(szInput);}
-#define GSPFLASH_TURNON(a) [&a]() {a.turnOn();}
-#define GSPFLASH_FLASHSLOW(a) [&a]() {a.flashSlow();}
-#define GSPFLASH_FLASHFAST(a) [&a]() {a.flashFast();}
-
+#define GSPFLASH_OFFON_PARSER(a) [&a](char* szInput) {a.parseOffOn(szInput);}
+#define GSPFLASH_TURNON(a)       [&a]() {a.turnOn();}
+#define GSPFLASH_TURNOFF(a)      [&a]() {a.turnOff();}
+#define GSPFLASH_FLASHSLOW(a)    [&a]() {a.flashSlow();}
+#define GSPFLASH_FLASHFAST(a)    [&a]() {a.flashFast();}
 
 class gspFlash:public gspGrouped {
 
     public:
+    
         gspFlash(int pin);
         ~gspFlash(){};
     
@@ -26,7 +27,8 @@ class gspFlash:public gspGrouped {
             return instance;
         }
 
-        void parseOnOff(char * );
+        void parseOnOff(char * ,int =0);
+        void parseOffOn(char * );
 
         void turnOn();
         void turnOff();
@@ -40,6 +42,7 @@ class gspFlash:public gspGrouped {
         }        
 
     protected:
+
         void setFirstInstance(gspGrouped * fi) {gspFlash::firstInstance = fi;}
         gspGrouped * getFirstInstance() {return gspFlash::firstInstance;}
         static gspGrouped * firstInstance;   
