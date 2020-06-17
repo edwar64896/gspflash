@@ -17,7 +17,7 @@ myLED.turnOn();
 myLED.turnOff();
 myLED.flashSlow();
 myLED.flashFast();
-
+```
 
 ## Requirements
 1. Include header file <gspflash.h>
@@ -44,7 +44,7 @@ void setup() {
 void loop () {
   gspFlash::checkAll();
 }
-
+```
 ## Advanced usage: Integration with gspstreamresponse and gspswitch
 
 I have created some utility macros which allow you to connect your LED instances directly to input classes such as gspstreamresponse and gspswitch:
