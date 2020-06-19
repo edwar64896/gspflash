@@ -23,6 +23,7 @@ myLED.flashFast();
 1. Include header file <gspflash.h>
 2. setup code
 3. Loop code
+4. Include library dependencies into project: gspflash, gspgrouped, functional-avr
 
 ## Example
 
@@ -60,17 +61,17 @@ is all the aditional code you need to get your onboard LED turning on and off wh
 
 ### other integration macros:
 
-Use these in place of callback function definitions:
+Use these in place of callback function definitions. Where I have written 'myLED' you will use your own instance of gspFlash that you have declared.
 
 #### gspstreamresponse:
-- GSPFLASH_ONOFF_PARSER(<gspFlash>)
-- GSPFLASH_OFFON_PARSER(<gspFlash>)
+- GSPFLASH_ONOFF_PARSER(myLED)
+- GSPFLASH_OFFON_PARSER(myLED)
   
 #### gspswitch:
-- GSPFLASH_TURNON(<gspFlash>)
-- GSPFLASH_TURNOFF(<gspFlash>)
-- GSPFLASH_FLASHSLOW(<gspFlash>)
-- GSPFLASH_FLASHFAST(<gspFlash>)
+- GSPFLASH_TURNON(myLED)
+- GSPFLASH_TURNOFF(myLED)
+- GSPFLASH_FLASHSLOW(myLED)
+- GSPFLASH_FLASHFAST(myLED)
   
 ## Integration example
 This code expects a simple momentary pushbutton switch on pin 12 and a built-in LED on pin 13.
