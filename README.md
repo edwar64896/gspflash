@@ -75,11 +75,12 @@ Use these in place of callback function definitions. Where I have written 'myLED
   
 ## Integration example
 This code expects a simple momentary pushbutton switch on pin 12 and a built-in LED on pin 13.
-Repeatedly pushing the button will turn the LED on and off.
+Repeatedly pushing the button will turn the LED on and off. Also, sending =a0 and =a1 via the serial port will turn the LED off and on.
 
 ```
 #include <Arduino.h>
 #include <gspflash.h>
+#include <gspstreamresponse.h>
 #include <gspswitch.h>
 
 gspFlash myLED(LED_BUILTIN);
@@ -88,12 +89,21 @@ gspFlash myLED(LED_BUILTIN);
 //mode 0 is non-latching.
 gspSwitch mySwitch(12,GSPFLASH_TURNOFF(myLED),GSPFLASH_TURNON(myLED),1 /*mode*/);
 
+//This integration allows the LED to be controlled from the serial port.
+//=a0 to turn off, =a1 to turn on.
+gspStreamResponse mySerial("=a",1,GSPFLASH_ONOFF_PARSER(myLED));
+
 void setup() {
+  Serial.begin(115200);
   gspGrouped::register_instance(& myLED);
   gspGrouped::register_instance(& mySwitch);
+  gspGrouped::register_instance(& mySerial);
+  gspStreamResponse::setup(Serial);
 }
+
 void loop () {
   gspFlash::checkAll();
   gspSwitch::checkAll();
+  gspStreamResponse::checkAll();
 }
 ```
