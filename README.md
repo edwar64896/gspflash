@@ -22,8 +22,7 @@ myLED.flashFast();
 ## Requirements
 1. Include header file <gspflash.h>
 2. setup code
-3. Loop code
-4. Include library dependencies into project: gspflash, gspgrouped, functional-avr
+3. Add gspflash library dependency into project.
 
 ## Example
 
@@ -37,14 +36,13 @@ gslFlash myOtherLED(12);
 void setup() {
   gspGrouped::register_instance(&myLED);
   gspGrouped::register_instance(&myOtherLED);
+
+  gspFlash::startCheckAll();
   
   myLED.flashFast();
   myOtherLED.turnOn();
 }
 
-void loop () {
-  gspFlash::checkAll();
-}
 ```
 ## Advanced usage: Integration with gspstreamresponse and gspswitch
 
@@ -99,10 +97,11 @@ void setup() {
   gspGrouped::register_instance(& mySwitch);
   gspGrouped::register_instance(& mySerial);
   gspStreamResponse::setup(Serial);
+
+  gspFlash::startCheckAll();
 }
 
 void loop () {
-  gspFlash::checkAll();
   gspSwitch::checkAll();
   gspStreamResponse::checkAll();
 }
