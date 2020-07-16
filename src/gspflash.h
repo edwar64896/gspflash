@@ -35,11 +35,18 @@ class gspFlash:public gspGrouped {
         void flashSlow();
         void flashFast();
     
-        bool check();
+        //bool check();
+        bool _isr();
 
-        static void checkAll() {
-            gspGrouped::checkAll(gspFlash::firstInstance);
-        }        
+        static void startCheckAll() {
+            gspGrouped::_isr_checking = true;
+            gspGrouped::_isr_setInitialInstance_fast(gspFlash::firstInstance);
+            gspGrouped::_isr_startTimer();
+        }    
+
+        //static void checkAll() {
+           // gspGrouped::checkAll(gspFlash::firstInstance);
+        //}        
 
     protected:
 
@@ -54,6 +61,7 @@ class gspFlash:public gspGrouped {
         static uint16_t _flashCnt;
         uint16_t _flashSpd=0;
         bool _flashToggle=false;
+        bool _flashToggleSlow=false;
 };
 
 #endif

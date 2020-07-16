@@ -53,20 +53,49 @@ void gspFlash::flashSlow() {
 
 }
 
+/*
 bool gspFlash::check() {
-    if (_flashCnt++>_flashSpd) {
-        _flashCnt=0;
-        _flashToggle=!_flashToggle;
-    }
 
     if (bFlashing) {
-        if (_flashToggle) {
-            digitalWrite(_pin,HIGH);   
-        } else {
-            digitalWrite(_pin,LOW);
+        if (_flashSpd==FAST_COUNT) {
+            if (gspGrouped::_flashStateFast) {
+               digitalWrite(_pin,HIGH);   
+            } else {
+               digitalWrite(_pin,LOW);   
+            }
+        } else if (_flashSpd==SLOW_COUNT) {
+            if (gspGrouped::_flashStateSlow) {
+               digitalWrite(_pin,HIGH);   
+            } else {
+               digitalWrite(_pin,LOW);   
+            }
         }
     }
-
     return true;
+}
+*/
 
+bool gspFlash::_isr() {
+
+    _flashToggle=!_flashToggle;
+    
+    if (_flashToggle)
+        _flashToggleSlow=!_flashToggleSlow;
+
+    if (bFlashing) {
+        if (_flashSpd==FAST_COUNT) {
+            if (_flashToggle) {
+               digitalWrite(_pin,HIGH);   
+            } else {
+               digitalWrite(_pin,LOW);   
+            }
+        } else if (_flashSpd==SLOW_COUNT) {
+            if (_flashToggleSlow) {
+               digitalWrite(_pin,HIGH);   
+            } else {
+               digitalWrite(_pin,LOW);   
+            }
+        }
+    }
+    return true;
 }
