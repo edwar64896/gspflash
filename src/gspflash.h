@@ -20,23 +20,16 @@ class gspFlash:public gspGrouped {
     
         gspFlash(int pin);
         ~gspFlash(){};
-    
-        static gspFlash * makeOne(uint8_t _pin) {
-            gspFlash * instance = new gspFlash(_pin);
-            gspGrouped::register_instance(instance);
-            return instance;
-        }
 
         void parseOnOff(char * ,int =0);
         void parseOffOn(char * );
 
-        void turnOn();
-        void turnOff();
-        void flashSlow();
-        void flashFast();
-
-        void toggleState() {_OnState = !_OnState};
-    
+        void flashNot()     { bFlashing = false; };
+        void turnOff()      { _OnState  = false; }
+        void turnOn()       { _OnState  = true;  }
+        void flashFast()    { bFlashing = true; _OnState=true; _flashSpd=FAST_COUNT; }
+        void flashSlow()    { bFlashing = true; _OnState=true; _flashSpd=SLOW_COUNT; }
+        void toggleState()  { _OnState  = !_OnState;}
         int getState();
 
         //bool check();

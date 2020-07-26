@@ -29,33 +29,10 @@ void gspFlash::parseOffOn(char * szInput) {
 
 gspFlash::gspFlash(int pin):gspGrouped() {
     _pin=pin;
+    pinMode(_pin,OUTPUT);
 }
 
-void gspFlash::turnOff(){
-//    digitalWrite(_pin,LOW); // we'll let the interrupt handler manage this.
-    bFlashing=false;
-    _OnState=false;
-}
 
-void gspFlash::turnOn() {
-//    digitalWrite(_pin,HIGH); // we'll let the interrupt handler manage this.
-    bFlashing=false;
-    _OnState=true;
-}
-
-void gspFlash::flashFast() {
-    bFlashing=true;
-    _OnState=true;
-    _flashSpd=FAST_COUNT;
-
-}
-
-void gspFlash::flashSlow() {
-    bFlashing=true;
-    _OnState=true;
-    _flashSpd=SLOW_COUNT;
-
-}
 
 int gspFlash::getState() {
     if (bFlashing) {
