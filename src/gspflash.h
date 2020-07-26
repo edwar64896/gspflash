@@ -34,7 +34,11 @@ class gspFlash:public gspGrouped {
         void turnOff();
         void flashSlow();
         void flashFast();
+
+        void toggleState() {_OnState = !_OnState};
     
+        int getState();
+
         //bool check();
         bool _isr();
 
@@ -62,6 +66,7 @@ class gspFlash:public gspGrouped {
         uint16_t _flashSpd=0;
         bool _flashToggle=false;
         bool _flashToggleSlow=false;
+        bool _OnState=false;
 };
 
 #endif
